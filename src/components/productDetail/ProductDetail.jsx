@@ -55,7 +55,11 @@ function ProductDetail() {
           </div>
         </div>
         <div className="details-location">
-          <div style={{ color: "#252B5C", fontSize: "22px" ,fontWeight:"700"}}>Location</div>
+          <div
+            style={{ color: "#252B5C", fontSize: "22px", fontWeight: "700" }}
+          >
+            Location
+          </div>
           <div className="location-address">
             <img src={Location2} alt="" />
             <h3>
@@ -64,7 +68,9 @@ function ProductDetail() {
             </h3>
           </div>
           <div className="location-map">
-            <LoadScript googleMapsApiKey="AIzaSyDFIdHnSIP_Oqb_3YdIhIk5rWARsh8y3Hs">
+            <LoadScript
+              googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}
+            >
               <GoogleMap
                 mapContainerStyle={mapStyles}
                 center={defaultCenter}
@@ -95,7 +101,16 @@ function ProductDetail() {
 
         {/* Property Amenities */}
         <div className="details-amenities">
-        <div style={{ color: "#252B5C", fontSize: "22px" ,fontWeight:"700", marginBottom:'20px'}}>Property Amenities</div>
+          <div
+            style={{
+              color: "#252B5C",
+              fontSize: "22px",
+              fontWeight: "700",
+              marginBottom: "20px",
+            }}
+          >
+            Property Amenities
+          </div>
 
           <div className="amenities-tags">
             {card.content.amenities && card.content.amenities.length > 0 ? (
@@ -114,7 +129,7 @@ function ProductDetail() {
           </div>
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </div>
   );
 }
