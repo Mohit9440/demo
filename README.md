@@ -1,70 +1,107 @@
-# Getting Started with Create React App
+# Project Documentation
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Overview
 
-## Available Scripts
+This project is a web application designed with mobile-first and tablet-first responsive layouts. It provides a seamless user experience across various devices, with specific interactions to enhance usability.
 
-In the project directory, you can run:
+## Table of Contents
 
-### `npm start`
+- [Routes](#routes)
+- [Responsive Design](#responsive-design)
+- [Features & Interactions](#features--interactions)
+- [Tech Stack](#tech-stack)
+- [Setup Instructions](#setup-instructions)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Routes
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+The application uses React Router for navigation. Below are the defined routes:
 
-### `npm test`
+- **/ (Explore Page)**: Displays the main page for exploring products.
+- **/details/:id (Product Detail Page)**: Displays detailed information about a specific product.
+- **/wishlists (Wishlists Page)**: Displays the user's wishlist items.
+- **/map (Google Map Page)**: Coming Soon.
+- **/login (Login Page)**: Coming soon.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Responsive Design
 
-### `npm run build`
+The application is built with responsiveness in mind, ensuring it works smoothly across mobile, tablet, and desktop devices.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Mobile and Tablet Versions:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- **Footer**: A fixed footer with navigation buttons to explore, wishlist, map, and login.
+- **Explore Page**: Scrollable page to load more items as the user scrolls.
+- **Wishlist**: Users can click on the heart icon to add products to the wishlist.
+- **Product Detail**: Tapping on an image or details navigates to the product details page.
+- **Google Map**: The map is interactive with 2-finger swipe to pan across the map.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Laptop/Desktop Version:
 
-### `npm run eject`
+- **Footer**: The footer is redesigned to accommodate a larger screen, with buttons placed horizontally across the bottom of the screen.
+- **Explore Page**: A similar scrollable layout with a larger grid to display more products without the need for horizontal scrolling.
+- **Product Detail**: Larger detailed view with more information about the product and an interactive map.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Features & Interactions
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Scrolling to Load More Options
+- On the **Explore** page, users can scroll down to load more product options dynamically. This interaction is designed to provide a smooth experience when browsing through a large list of products.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### Click on Heart Icon to Add to "Wishlist"
+- On both the **Explore** and **Wishlists** pages, products can be added to the wishlist by clicking the heart icon. The heart icon changes color when the product is added to the wishlist.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Slide Pictures within a Box
+- On the **Product Detail** page, users can slide through images of the product within a specified box. A carousel slider is used to allow users to navigate through multiple images of the product.
 
-## Learn More
+### Click on Image + Details to Go to Product Detail
+- On the **Explore** page, clicking on either the product image or the "Details" link navigates to the **Product Detail** page where more information about the product is provided.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### 2-Finger Swipe to Pan Google Map
+- On the **Product Detail** page, users can interact with an embedded Google Map. The map is panable using a 2-finger swipe, providing a touch-friendly experience for mobile and tablet users.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Tech Stack
 
-### Code Splitting
+- **React**: Used for building the frontend of the application.
+- **React Router**: Used for routing and navigation between different pages.
+- **React Bootstrap**: Used for UI components with a mobile-first approach.
+- **Google Maps API**: Used to display the map and handle user interactions like panning.
+- **CSS (Media Queries)**: Used for making the layout responsive across devices.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-### Analyzing the Bundle Size
+## Setup Instructions
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+To run the application locally, follow these steps:
 
-### Making a Progressive Web App
+1. Clone the repository to your local machine.
+   ```bash
+   git clone https://github.com/your-username/your-repository-name.git
+   ```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+2. Navigate to the project directory.
+   ```bash
+   cd your-repository-name
+   ```
 
-### Advanced Configuration
+3. Install the dependencies.
+   ```bash
+   npm install
+   ```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+4. Start the development server.
+   ```bash
+   npm start
+   ```
 
-### Deployment
+5. Open your browser and go to `http://localhost:3000` to view the app.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## Dependencies
 
-### `npm run build` fails to minify
+- `react-router-dom` - For routing and navigation between pages.
+- `react` - The core React library.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Contributing
+
+Feel free to fork the repository, submit issues, and create pull requests for improvements or bug fixes.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+   git clone <repository-url>
