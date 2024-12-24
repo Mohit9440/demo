@@ -130,10 +130,10 @@ function Explore() {
   const handleAddToWishlist = (id, card) => {
     const newLikedCards = { ...likedCards, [id]: !likedCards[id] };
     setLikedCards(newLikedCards);
-  
+
     localStorage.setItem("likedCards", JSON.stringify(newLikedCards));
   };
-  
+
   const imageSliderRef = useRef();
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
@@ -148,8 +148,8 @@ function Explore() {
         <div className="logo">propsoch</div>
       </header>
       <div className="explore-cards">
-        {initialCards.map((card, index) => (
-          <div className="explore-card" key={index}>
+        {initialCards.slice(0, 4).map((card) => (
+          <div className="explore-card" key={card.id}>
             <div className="explore-card-top">
               <div
                 className="explore-card-images"
@@ -208,7 +208,7 @@ function Explore() {
                     alt=""
                   />
                   <span className="explore-content-internal-span">
-                    {card.content.star}
+                    {card.content.star.toFixed(1)}
                   </span>
                 </div>
               </div>
@@ -227,9 +227,10 @@ function Explore() {
             </div>
           </div>
         ))}
+
         {showMore &&
-          [initialCards[4], initialCards[5]].map((card, index) => (
-            <div className="explore-card" key={index}>
+          initialCards.slice(4, 6).map((card) => (
+            <div className="explore-card" key={card.id}>
               <div className="explore-card-top">
                 <div
                   className="explore-card-images"
@@ -262,8 +263,8 @@ function Explore() {
                     )}
                     <div className="animate">
                       <AnimatedHeart
-                        isClick={!!likedCards[index]}
-                        onClick={() => handleAddToWishlist(index, card)}
+                        isClick={!!likedCards[card.id]}
+                        onClick={() => handleAddToWishlist(card.id, card)}
                       />
                     </div>
                   </div>

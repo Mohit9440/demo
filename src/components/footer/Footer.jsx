@@ -36,11 +36,19 @@ function Footer() {
           <img src={heart} alt="" />
           <span>Wishlists</span>
         </Button>
-        <Button variant="link" className="footer-button">
+        <Button
+          variant="link"
+          className={`footer-button ${isActive("/map") ? "active" : ""}`}
+          onClick={() => handleNavigate("/map")}
+        >
           <img src={location1} alt="" />
           <span>Show map</span>
         </Button>
-        <Button variant="link" className="footer-button">
+        <Button
+          variant="link"
+          className={`footer-button ${isActive("/login") ? "active" : ""}`}
+          onClick={() => handleNavigate("/login")}
+        >
           <img src={profile} alt="" />
           <span> Log in</span>
         </Button>

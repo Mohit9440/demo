@@ -161,7 +161,7 @@ function Wishlists() {
                       alt=""
                     />
                     <span className="wishlist-content-internal-span">
-                      {card.content.star}
+                      {card.content.star.toFixed(1)}
                     </span>
                   </div>
                 </div>

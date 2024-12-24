@@ -108,3 +108,16 @@
   text-decoration: none;
   color: inherit;
 }
+
+
+@media (max-width: 640px) {
+    .wishlist-card-img {
+        object-fit: fill;
+    }
+}
+
+@media (max-width: 480px) {
+    .wishlist-card-img {
+        object-fit: cover;
+    }
+}
