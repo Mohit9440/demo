@@ -92,6 +92,16 @@ To run the application locally, follow these steps:
 
 5. Open your browser and go to `http://localhost:3000` to view the app.
 
+## Setup Google Maps API Key
+
+To securely add the Google Maps API key, follow these steps:
+
+1. **Create a `.env` file in the root of your project**, if it doesn't already exist.
+
+2. **Add your Google Maps API key to the `.env` file**:
+   ```env
+   REACT_APP_GOOGLE_MAPS_API_KEY=your-api-key-here
+
 ## Dependencies
 
 - `react-router-dom` - For routing and navigation between pages.
