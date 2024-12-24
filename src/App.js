@@ -1,11 +1,12 @@
-import logo from './logo.svg';
-import './App.css';
-import Explore from './components/explore/Explore';
+import React from "react";
+import { BrowserRouter } from "react-router-dom";
+import AppRoutes from "./AppRoutes"; // Separate routes into a new file
+
 function App() {
   return (
-    <div className="App">
-      <Explore/>
-    </div>
+    <BrowserRouter>
+      <AppRoutes />
+    </BrowserRouter>
   );
 }
 

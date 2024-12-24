@@ -82,3 +82,8 @@
     font-family: 'Poppins', sans-serif;
     font-weight: 300;
 }
+.animate{
+  height: 65px;
+  width: 65px;
+  margin-top: -34px;
+}
