@@ -1,19 +1,26 @@
+body {
+  padding-bottom: 90px;
+  margin: 0;
+}
 .product-details {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   color: #333;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 .details-header {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  padding: 10px 20px;
+  padding: 18px;
   background-color: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
 }
 
 .logo {
-  font-size: 24px;
+  font-size: 28px;
   font-weight: bold;
   color: #ff6600;
 }
@@ -25,17 +32,18 @@
 
 .details-image-container {
   position: relative;
+  padding: 20px;
 }
 
 .details-image {
   width: 100%;
-  border-bottom: 5px solid #f0f0f0;
+  border-radius: 16px;
 }
 
 .most-liked {
   position: absolute;
-  top: 10px;
-  left: 10px;
+  top: 30px;
+  left: 30px;
   background-color: #fff;
   padding: 8px 14px;
   border-radius: 20px;
@@ -59,7 +67,7 @@
   margin: 0;
   font-size: 24px;
 }
-.details-heading p{
+.details-heading p {
   margin: 0;
   font-size: 14px;
   color: #666;
@@ -89,6 +97,7 @@
   display: flex;
   align-items: center;
   margin-bottom: 10px;
+  margin-top: 20px;
 }
 
 .location-address p {
@@ -107,17 +116,48 @@
 .amenities-tags {
   display: flex;
   gap: 10px;
+  display: flex;
+  justify-content: flex-start;
 }
 
 .amenity-tag {
   font-size: 14px;
   border-radius: 20px;
+  background-color: #f5f4f8;
+  width: 20%;
+  padding: 10px;
+  border-radius: 20px;
+  border: none;
+  color: #1f4c6b;
+  font-size: 10px;
+  font-weight: 600;
 }
 
-.details-footer {
+.location-map {
+  margin-bottom: 24px;
+}
+.details-nearby {
   display: flex;
-  justify-content: space-around;
-  padding: 10px 0;
-  background-color: #fff;
-  box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+  justify-content: space-between;
+}
+
+.nearby-tag {
+  background-color: #f5f4f8;
+  width: 30%;
+  padding: 10px;
+  border-radius: 20px;
+  border: none;
+  color: #1f4c6b;
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.map-button {
+  width: 100%;
+  background-color: #ff750426;
+  padding: 10px;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  border: none;
+  color: #ff7504;
 }

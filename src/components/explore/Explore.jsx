@@ -1,13 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import AnimatedHeart from "react-animated-heart";
 import "./explore.css";
 import { Link } from "react-router-dom";
+import Footer from "../footer/Footer";
 
 function Explore() {
   const cards = [
     {
       id: 1,
-      image: require("../../assets/p1.jpeg"),
+      images: [
+        require("../../assets/p1.jpeg"),
+        require("../../assets/p2.jpeg"),
+        require("../../assets/p3.jpeg"),
+      ],
       content: {
         liked: "Most Liked",
         show: 41172,
@@ -16,11 +21,16 @@ function Explore() {
         subheading: "Apr 5 – 10",
         starIcon: require("../../assets/star.svg").default,
         location: "Sector 57, Gurgaon",
+        amenities: ["House", "Apartment"],
       },
     },
     {
       id: 2,
-      image: require("../../assets/p2.jpeg"),
+      images: [
+        require("../../assets/p2.jpeg"),
+        require("../../assets/p3.jpeg"),
+        require("../../assets/p4.jpeg"),
+      ],
       content: {
         liked: "Most Liked",
         show: 8402,
@@ -28,11 +38,17 @@ function Explore() {
         heading: "Rainbow Heights, HSR",
         subheading: "Mar 9 – 14",
         starIcon: require("../../assets/greenStar.svg").default,
+        location: "Sector 7, HSR",
+        amenities: ["House", "Apartment", "Gym"],
       },
     },
     {
       id: 3,
-      image: require("../../assets/p3.jpeg"),
+      images: [
+        require("../../assets/p3.jpeg"),
+        require("../../assets/p4.jpeg"),
+        require("../../assets/p1.jpeg"),
+      ],
       content: {
         liked: "Most Liked",
         show: 12648,
@@ -40,11 +56,17 @@ function Explore() {
         heading: "Walden, Colorado, US",
         subheading: "Mar 3 – 8",
         starIcon: require("../../assets/redStar.svg").default,
+        location: "Street 4, Colorado , US",
+        amenities: ["House", "Apartment", "Pool"],
       },
     },
     {
       id: 4,
-      image: require("../../assets/p4.jpeg"),
+      images: [
+        require("../../assets/p4.jpeg"),
+        require("../../assets/p1.jpeg"),
+        require("../../assets/p2.jpeg"),
+      ],
       content: {
         liked: "Most Liked",
         show: 6483,
@@ -52,12 +74,18 @@ function Explore() {
         heading: "Poggibonsi, Italy",
         subheading: "Apr 26 – May 1",
         starIcon: require("../../assets/greenStar.svg").default,
+        location: "Cross 4 , Poggibonsi",
+        amenities: ["House", "Villa"],
       },
     },
   ];
 
   const [showMore, setShowMore] = useState(false);
-  const [likedCards, setLikedCards] = useState({});
+  const [likedCards, setLikedCards] = useState(() => {
+    // Retrieve liked cards from localStorage if available
+    const storedLikedCards = JSON.parse(localStorage.getItem("likedCards"));
+    return storedLikedCards || {};
+  });
 
   const handleScroll = () => {
     const { scrollTop, clientHeight, scrollHeight } = document.documentElement;
@@ -66,25 +94,21 @@ function Explore() {
     }
   };
 
-  const handleAddToWishlist = (index) => {
-    setLikedCards((prev) => ({
-      ...prev,
-      [index]: !prev[index],
-    }));
+  const handleAddToWishlist = (index, card) => {
+    const newLikedCards = { ...likedCards, [index]: !likedCards[index] };
+    setLikedCards(newLikedCards);
+
+    // Save the liked cards to localStorage
+    if (newLikedCards[index]) {
+      // If liked, save the card to localStorage
+      localStorage.setItem("likedCards", JSON.stringify(newLikedCards));
+    } else {
+      // If unliked, remove the card from localStorage
+      localStorage.setItem("likedCards", JSON.stringify(newLikedCards));
+    }
   };
 
-  const handleSlideLeft = (e) => {
-    const card = e.currentTarget.closest(".explore-card");
-    const image = card.querySelector(".explore-card-image");
-    image.scrollLeft -= 100;
-  };
-
-  const handleSlideRight = (e) => {
-    const card = e.currentTarget.closest(".explore-card");
-    const image = card.querySelector(".explore-card-image");
-    image.scrollLeft += 100;
-  };
-
+  const imageSliderRef = useRef();
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
     return () => {
@@ -94,36 +118,46 @@ function Explore() {
 
   return (
     <div className="explore-main">
+      <header className="details-header">
+        <div className="logo">propsoch</div>
+      </header>
       <div className="explore-cards">
         {cards.map((card, index) => (
           <div className="explore-card" key={index}>
             <div className="explore-card-top">
-              <div className="explore-card-image">
-                <img
-                  src={card.image}
-                  alt="explore-card"
-                  className="explore-card-img"
-                />
-                <div
-                  className="explore-card-slide-left"
-                  onClick={handleSlideLeft}
-                >
-                  &lt;
-                </div>
-                <div
-                  className="explore-card-slide-right"
-                  onClick={handleSlideRight}
-                >
-                  &gt;
-                </div>
+              <div
+                className="explore-card-images"
+                ref={imageSliderRef}
+                style={{
+                  overflowX: "auto",
+                  display: "flex",
+                  scrollBehavior: "smooth",
+                }}
+              >
+                {card.images.map((image, imageIndex) => (
+                  <Link
+                    to={`/details/${card.id}`}
+                    state={card}
+                    className="explore-content-link"
+                    key={imageIndex}
+                  >
+                    <img
+                      src={image}
+                      alt={`explore-card-${imageIndex}`}
+                      className="explore-card-img"
+                    />
+                  </Link>
+                ))}
               </div>
               <div className="explore-top-wrapper">
                 <div className="explore-card-top-content">
-                  <div className="liked">{card.content.liked}</div>
+                  {card.content.liked && (
+                    <div className="liked">{card.content.liked}</div>
+                  )}
                   <div className="animate">
                     <AnimatedHeart
                       isClick={!!likedCards[index]}
-                      onClick={() => handleAddToWishlist(index)}
+                      onClick={() => handleAddToWishlist(index, card)}
                     />
                   </div>
                 </div>
@@ -152,8 +186,11 @@ function Explore() {
                   </span>
                 </div>
               </div>
-              <Link to={`/details/${card.id}`}                 state={card} // Pass the card data here
- className="explore-content-link">
+              <Link
+                to={`/details/${card.id}`}
+                state={card} // Pass the card data here
+                className="explore-content-link"
+              >
                 <div className="explore-content-main-heading">
                   {card.content.heading}
                 </div>
@@ -164,8 +201,8 @@ function Explore() {
             </div>
           </div>
         ))}
-        {showMore && <div className="load-more">Loading more options...</div>}
       </div>
+      <Footer />
     </div>
   );
 }

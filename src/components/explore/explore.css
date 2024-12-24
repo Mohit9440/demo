@@ -1,8 +1,24 @@
+body {
+  padding-bottom: 90px;
+  margin: 0;
+}
 .explore-cards {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 10px;
+}
+.explore-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.nav-options button {
+  margin-left: 10px;
+  color: #333;
 }
 .explore-card {
   display: flex;
@@ -18,6 +34,13 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+}
+.explore-card-images {
+  display: flex;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  width: 100%; 
+  gap: 10px;
 }
 .explore-card-img {
   width: 220px;
@@ -86,4 +109,8 @@
   height: 65px;
   width: 65px;
   margin-top: -34px;
+}
+.explore-content-link{
+  text-decoration: none;
+  color:#000000 ;
 }

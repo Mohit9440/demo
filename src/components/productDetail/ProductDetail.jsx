@@ -2,48 +2,44 @@ import React from "react";
 import { Button } from "react-bootstrap";
 import { useLocation } from "react-router-dom";
 import { FaMapMarkerAlt } from "react-icons/fa";
+import { GoogleMap, LoadScript } from "@react-google-maps/api";
 import "./productdetail.css";
-
+import Location2 from "../../assets/location2.svg";
+import Footer from "../footer/Footer";
 function ProductDetail() {
   const location = useLocation();
-  const card = location.state; // Access the passed card data
+  const card = location.state;
 
   if (!card) {
     return <p>No details available.</p>;
   }
 
+  const mapStyles = {
+    height: "300px",
+    width: "100%",
+  };
+
+  const defaultCenter = {
+    lat: card.latitude || -6.9932,
+    lng: card.longitude || 110.418,
+  };
+  const firstImage = Array.isArray(card.images) ? card.images[0] : card.image;
+
   return (
     <div className="product-details">
-      {/* Header */}
       <header className="details-header">
         <div className="logo">propsoch</div>
-        <div className="nav-options">
-          <Button variant="link" className="nav-button">
-            Explore
-          </Button>
-          <Button variant="link" className="nav-button">
-            Wishlists
-          </Button>
-          <Button variant="link" className="nav-button">
-            Show map
-          </Button>
-          <Button variant="link" className="nav-button">
-            Log in
-          </Button>
-        </div>
       </header>
 
-      {/* Property Image and Tag */}
       <div className="details-image-container">
         <div className="most-liked">Most Liked</div>
         <img
-          src={card.image || "https://via.placeholder.com/600x400"}
+          src={firstImage || "https://via.placeholder.com/600x400"}
           alt="Property"
           className="details-image"
         />
       </div>
 
-      {/* Property Details */}
       <div className="details-content">
         <div className="details-heading">
           <div>
@@ -59,20 +55,25 @@ function ProductDetail() {
           </div>
         </div>
         <div className="details-location">
-          <h4>Location</h4>
+          <div style={{ color: "#252B5C", fontSize: "22px" }}>Location</div>
           <div className="location-address">
-            <FaMapMarkerAlt className="location-icon" />
+            <img src={Location2} alt="" />
             <p>
               {card.address ||
                 "Jl. Gerungsari, Bulusan, Kec. Tembalang, Kota Semarang, Jawa Tengah 50277"}
             </p>
           </div>
           <div className="location-map">
-            <img
-              src="https://via.placeholder.com/600x300"
-              alt="Map"
-              className="map-image"
-            />
+            <LoadScript googleMapsApiKey="AIzaSyDFIdHnSIP_Oqb_3YdIhIk5rWARsh8y3Hs">
+              <GoogleMap
+                mapContainerStyle={mapStyles}
+                center={defaultCenter}
+                zoom={15}
+                options={{
+                  gestureHandling: "greedy", // Enables two-finger pan
+                }}
+              />
+            </LoadScript>
             <Button variant="primary" className="map-button">
               View on Map
             </Button>
@@ -96,8 +97,8 @@ function ProductDetail() {
         <div className="details-amenities">
           <h4>Property Amenities</h4>
           <div className="amenities-tags">
-            {card.amenities &&
-              card.amenities.map((amenity, index) => (
+            {card.content.amenities && card.content.amenities.length > 0 ? (
+              card.content.amenities.map((amenity, index) => (
                 <Button
                   key={index}
                   variant="outline-primary"
@@ -105,26 +106,14 @@ function ProductDetail() {
                 >
                   {amenity}
                 </Button>
-              ))}
+              ))
+            ) : (
+              <p>No amenities available</p>
+            )}
           </div>
         </div>
       </div>
-
-      {/* Bottom Navigation */}
-      <footer className="details-footer">
-        <Button variant="link" className="footer-button">
-          Explore
-        </Button>
-        <Button variant="link" className="footer-button">
-          Wishlists
-        </Button>
-        <Button variant="link" className="footer-button">
-          Show map
-        </Button>
-        <Button variant="link" className="footer-button">
-          Log in
-        </Button>
-      </footer>
+      <Footer/>
     </div>
   );
 }
