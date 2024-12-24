@@ -1,24 +1,28 @@
 import React from "react";
 import { Button } from "react-bootstrap";
-import { useNavigate } from "react-router-dom"; // Import useNavigate from react-router-dom
+import { useNavigate, useLocation } from "react-router-dom";
 import "./footer.css";
 import search from "../../assets/search.svg";
 import heart from "../../assets/heart2.svg";
 import location1 from "../../assets/location.svg";
 import profile from "../../assets/profile.svg";
-function Footer() {
-  const navigate = useNavigate(); // Initialize useNavigate
 
-  // Handle button click for navigation
+function Footer() {
+  const navigate = useNavigate();
+  const location = useLocation();
+
   const handleNavigate = (route) => {
-    navigate(route); // Navigate to the specified route
+    navigate(route);
   };
+
+  const isActive = (route) => location.pathname === route;
+
   return (
     <div>
       <footer className="details-footer">
         <Button
           variant="link"
-          className="footer-button"
+          className={`footer-button ${isActive("/") ? "active" : ""}`}
           onClick={() => handleNavigate("/")}
         >
           <img src={search} alt="" />
@@ -26,7 +30,7 @@ function Footer() {
         </Button>
         <Button
           variant="link"
-          className="footer-button"
+          className={`footer-button ${isActive("/wishlists") ? "active" : ""}`}
           onClick={() => handleNavigate("/wishlists")}
         >
           <img src={heart} alt="" />

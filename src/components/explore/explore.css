@@ -1,13 +1,15 @@
 body {
-  padding-bottom: 90px;
+  padding-bottom: 100px;
   margin: 0;
 }
+
 .explore-cards {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 10px;
 }
+
 .explore-header {
   display: flex;
   justify-content: space-between;
@@ -16,14 +18,17 @@ body {
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
+
 .nav-options button {
   margin-left: 10px;
   color: #333;
 }
+
 .explore-card {
   display: flex;
   flex-direction: column;
 }
+
 .explore-card-top {
   width: 220px;
   height: 300px;
@@ -35,6 +40,7 @@ body {
   flex-direction: column;
   justify-content: space-between;
 }
+
 .explore-card-images {
   display: flex;
   overflow-x: auto;
@@ -42,22 +48,26 @@ body {
   width: 100%; 
   gap: 10px;
 }
+
 .explore-card-img {
   width: 220px;
   height: 300px;
   object-fit: cover;
   border-radius: 16px;
 }
+
 .explore-card-image {
   width: 220px;
   height: 200px;
   object-fit: cover;
   border-radius: 10px;
 }
+
 .explore-top-wrapper {
   position: absolute;
   width: 200px;
 }
+
 .explore-card-top-content {
   display: flex;
   flex-direction: row;
@@ -66,21 +76,25 @@ body {
   padding: 10px;
   width: 100%;
 }
+
 .liked {
   padding: 8px 14px;
   background: #fff;
   border-radius: 20px;
   font-size: 14px;
 }
+
 .explore-card-content {
   padding: 0px 20px 10px;
 }
+
 .explore-content-main {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
 }
+
 .explore-content-internal {
   display: flex;
   flex-direction: row;
@@ -94,6 +108,7 @@ body {
   text-align: left;
   font-weight: 600;
 }
+
 .explore-content-main-subheading {
   margin-top: 6px;
   font-size: 14px;
@@ -101,16 +116,37 @@ body {
   text-align: left;
 }
 
-.explore-content-internal-span{
-    font-family: 'Poppins', sans-serif;
-    font-weight: 300;
+.explore-content-internal-span {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 300;
 }
-.animate{
+
+.animate {
   height: 65px;
   width: 65px;
   margin-top: -34px;
 }
-.explore-content-link{
+
+.explore-content-link {
   text-decoration: none;
-  color:#000000 ;
+  color: #000000;
+}
+@media (max-width: 768px) {
+  .explore-header {
+    padding: 10px;
+  }
+
+  .explore-card-content {
+    padding: 0px 10px 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .explore-content-main-heading {
+    font-size: 14px;
+  }
+
+  .explore-content-main-subheading {
+    font-size: 12px;
+  }
 }

@@ -46,7 +46,7 @@ function ProductDetail() {
             <h3>{card.content.heading}</h3>
             <p>
               <FaMapMarkerAlt className="location-icon" />
-              <h5 style={{ margin: "0px" }}>{card.content.location}</h5>
+              <p style={{ margin: "0px" }}>{card.content.location}</p>
             </p>
           </div>
           <div className="details-price">
@@ -55,13 +55,13 @@ function ProductDetail() {
           </div>
         </div>
         <div className="details-location">
-          <div style={{ color: "#252B5C", fontSize: "22px" }}>Location</div>
+          <div style={{ color: "#252B5C", fontSize: "22px" ,fontWeight:"700"}}>Location</div>
           <div className="location-address">
             <img src={Location2} alt="" />
-            <p>
+            <h3>
               {card.address ||
                 "Jl. Gerungsari, Bulusan, Kec. Tembalang, Kota Semarang, Jawa Tengah 50277"}
-            </p>
+            </h3>
           </div>
           <div className="location-map">
             <LoadScript googleMapsApiKey="AIzaSyDFIdHnSIP_Oqb_3YdIhIk5rWARsh8y3Hs">
@@ -95,7 +95,8 @@ function ProductDetail() {
 
         {/* Property Amenities */}
         <div className="details-amenities">
-          <h4>Property Amenities</h4>
+        <div style={{ color: "#252B5C", fontSize: "22px" ,fontWeight:"700", marginBottom:'20px'}}>Property Amenities</div>
+
           <div className="amenities-tags">
             {card.content.amenities && card.content.amenities.length > 0 ? (
               card.content.amenities.map((amenity, index) => (

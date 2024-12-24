@@ -100,7 +100,9 @@
   color: #1f4c6b;
   font-size: 10px;
   font-weight: 600;
+  width: auto;
 }
+
 
 .wishlist-content-link {
   text-decoration: none;

@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import Footer from "../footer/Footer";
 
 function Explore() {
-  const cards = [
+  const initialCards = [
     {
       id: 1,
       images: [
@@ -78,11 +78,44 @@ function Explore() {
         amenities: ["House", "Villa"],
       },
     },
+    {
+      id: 5,
+      images: [
+        require("../../assets/p2.jpeg"),
+        require("../../assets/p3.jpeg"),
+      ],
+      content: {
+        liked: "Most Liked",
+        show: 5000,
+        star: 4.5,
+        heading: "Vista Apartments, New York",
+        subheading: "Mar 1 – 5",
+        starIcon: require("../../assets/star.svg").default,
+        location: "Manhattan, NY",
+        amenities: ["Apartment", "Gym"],
+      },
+    },
+    {
+      id: 6,
+      images: [
+        require("../../assets/p1.jpeg"),
+        require("../../assets/p4.jpeg"),
+      ],
+      content: {
+        liked: "Most Liked",
+        show: 6000,
+        star: 4.8,
+        heading: "Ocean View Villa, California",
+        subheading: "Apr 15 – 20",
+        starIcon: require("../../assets/greenStar.svg").default,
+        location: "Malibu, CA",
+        amenities: ["Villa", "Pool"],
+      },
+    },
   ];
 
   const [showMore, setShowMore] = useState(false);
   const [likedCards, setLikedCards] = useState(() => {
-    // Retrieve liked cards from localStorage if available
     const storedLikedCards = JSON.parse(localStorage.getItem("likedCards"));
     return storedLikedCards || {};
   });
@@ -94,20 +127,13 @@ function Explore() {
     }
   };
 
-  const handleAddToWishlist = (index, card) => {
-    const newLikedCards = { ...likedCards, [index]: !likedCards[index] };
+  const handleAddToWishlist = (id, card) => {
+    const newLikedCards = { ...likedCards, [id]: !likedCards[id] };
     setLikedCards(newLikedCards);
-
-    // Save the liked cards to localStorage
-    if (newLikedCards[index]) {
-      // If liked, save the card to localStorage
-      localStorage.setItem("likedCards", JSON.stringify(newLikedCards));
-    } else {
-      // If unliked, remove the card from localStorage
-      localStorage.setItem("likedCards", JSON.stringify(newLikedCards));
-    }
+  
+    localStorage.setItem("likedCards", JSON.stringify(newLikedCards));
   };
-
+  
   const imageSliderRef = useRef();
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
@@ -122,7 +148,7 @@ function Explore() {
         <div className="logo">propsoch</div>
       </header>
       <div className="explore-cards">
-        {cards.map((card, index) => (
+        {initialCards.map((card, index) => (
           <div className="explore-card" key={index}>
             <div className="explore-card-top">
               <div
@@ -156,8 +182,8 @@ function Explore() {
                   )}
                   <div className="animate">
                     <AnimatedHeart
-                      isClick={!!likedCards[index]}
-                      onClick={() => handleAddToWishlist(index, card)}
+                      isClick={!!likedCards[card.id]}
+                      onClick={() => handleAddToWishlist(card.id, card)}
                     />
                   </div>
                 </div>
@@ -188,7 +214,7 @@ function Explore() {
               </div>
               <Link
                 to={`/details/${card.id}`}
-                state={card} // Pass the card data here
+                state={card}
                 className="explore-content-link"
               >
                 <div className="explore-content-main-heading">
@@ -201,6 +227,86 @@ function Explore() {
             </div>
           </div>
         ))}
+        {showMore &&
+          [initialCards[4], initialCards[5]].map((card, index) => (
+            <div className="explore-card" key={index}>
+              <div className="explore-card-top">
+                <div
+                  className="explore-card-images"
+                  ref={imageSliderRef}
+                  style={{
+                    overflowX: "auto",
+                    display: "flex",
+                    scrollBehavior: "smooth",
+                  }}
+                >
+                  {card.images.map((image, imageIndex) => (
+                    <Link
+                      to={`/details/${card.id}`}
+                      state={card}
+                      className="explore-content-link"
+                      key={imageIndex}
+                    >
+                      <img
+                        src={image}
+                        alt={`explore-card-${imageIndex}`}
+                        className="explore-card-img"
+                      />
+                    </Link>
+                  ))}
+                </div>
+                <div className="explore-top-wrapper">
+                  <div className="explore-card-top-content">
+                    {card.content.liked && (
+                      <div className="liked">{card.content.liked}</div>
+                    )}
+                    <div className="animate">
+                      <AnimatedHeart
+                        isClick={!!likedCards[index]}
+                        onClick={() => handleAddToWishlist(index, card)}
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="explore-card-content">
+                <div className="explore-content-main">
+                  <div className="explore-content-internal">
+                    <img
+                      style={{ width: "16px", height: "16px" }}
+                      src={require("../../assets/show.svg").default}
+                      alt=""
+                    />
+                    <span className="explore-content-internal-span">
+                      {card.content.show}
+                    </span>
+                  </div>
+                  <div className="explore-content-internal">
+                    <img
+                      style={{ width: "16px", height: "16px" }}
+                      src={card.content.starIcon}
+                      alt=""
+                    />
+                    <span className="explore-content-internal-span">
+                      {card.content.star}
+                    </span>
+                  </div>
+                </div>
+                <Link
+                  to={`/details/${card.id}`}
+                  state={card}
+                  className="explore-content-link"
+                >
+                  <div className="explore-content-main-heading">
+                    {card.content.heading}
+                  </div>
+                  <div className="explore-content-main-subheading">
+                    {card.content.subheading}
+                  </div>
+                </Link>
+              </div>
+            </div>
+          ))}
       </div>
       <Footer />
     </div>
